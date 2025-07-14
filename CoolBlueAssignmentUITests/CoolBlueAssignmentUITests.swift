@@ -13,14 +13,12 @@ final class CoolBlueAssignmentUITests: XCTestCase {
         continueAfterFailure = false
     }
 
-    override func tearDownWithError() throws {
-		
-    }
+    override func tearDownWithError() throws {}
 
     @MainActor
     func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
+		// This assignment contains only one scene and doesn't involve much UI testing.
+		let app = XCUIApplication()
         app.launchArguments = ["UI_TESTING"]
 		app.launch()
 		app.activate()
@@ -30,5 +28,4 @@ final class CoolBlueAssignmentUITests: XCTestCase {
 		scrollViewsQuery/*@START_MENU_TOKEN@*/.firstMatch/*[[".containing(.other, identifier: \"Vertical scroll bar, 3 pages\").firstMatch",".containing(.other, identifier: nil).firstMatch",".firstMatch"],[[[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeUp()
 
     }
-
 }

@@ -1,6 +1,0 @@
-
-@MainActor
-@Observable
-class NetworkManager {
-	
-}
