@@ -1,0 +1,1 @@
+"https://mobile-api.coolblue-production.eu/graphql"

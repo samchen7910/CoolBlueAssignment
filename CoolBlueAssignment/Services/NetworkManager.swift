@@ -1,0 +1,6 @@
+
+@MainActor
+@Observable
+class NetworkManager {
+	
+}
