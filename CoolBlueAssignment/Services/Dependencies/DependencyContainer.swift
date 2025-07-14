@@ -39,20 +39,20 @@ struct Dependencies {
 			let networkManager = NetworkManager(networkService: NetworkServiceMock())
 			container.register(NetworkManager.self, service: networkManager)
 			
-			let locationManager = LocationManager()
-			container.register(LocationManager.self, service: locationManager)
+			let locationManager = LocationManagerMock()
+			container.register(LocationManagerProtocol.self, service: locationManager)
 		case .dev:
 			let networkManager = NetworkManager(networkService: NetworkService())
 			container.register(NetworkManager.self, service: networkManager)
 			
 			let locationManager = LocationManager()
-			container.register(LocationManager.self, service: locationManager)
+			container.register(LocationManagerProtocol.self, service: locationManager)
 		case .prod:
 			let networkManager = NetworkManager(networkService: NetworkService())
 			container.register(NetworkManager.self, service: networkManager)
 			
 			let locationManager = LocationManager()
-			container.register(LocationManager.self, service: locationManager)
+			container.register(LocationManagerProtocol.self, service: locationManager)
 		}
 	}
 }

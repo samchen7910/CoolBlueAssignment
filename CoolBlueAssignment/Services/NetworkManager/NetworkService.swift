@@ -1,10 +1,23 @@
+//
+//  NetworkService.swift
+//  CoolBlueAssignment
+//
+//  Created by Tran Gia Huy on 7/14/25.
+//
+
+import SwiftUI
+@preconcurrency import Apollo
+
+protocol NetworkServiceProtocol: Sendable {
+	func fetchStoreList() async throws -> [Store]
+}
 
 struct NetworkService: NetworkServiceProtocol {
 	private let apolloClient: ApolloClient
 	private let decoder = JSONDecoder()
 
 	init() {
-		let url = URL(string: "https://mobile-api.coolblue-production.eu/graphql")!
+		let url = URL(string: baseUrl)!
 		let configuration = URLSessionConfiguration.default
 		configuration.httpAdditionalHeaders = [
 			"Content-Type": "application/json",
@@ -19,7 +32,6 @@ struct NetworkService: NetworkServiceProtocol {
 		
 		apolloClient = ApolloClient(networkTransport: transport, store: store)
 	}
-	
 	
 	func fetchStoreList() async throws -> [Store] {
 		try await withCheckedThrowingContinuation { continuation in

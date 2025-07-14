@@ -4,10 +4,38 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CoolBlueAssignment-Dev.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>CoolBlueAssignment-Mock.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>CoolBlueAssignment.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>E8FA94622E2165460082E33C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E8FA946F2E2165480082E33C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E8FA94792E2165480082E33C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

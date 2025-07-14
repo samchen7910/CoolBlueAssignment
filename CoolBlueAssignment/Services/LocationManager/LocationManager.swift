@@ -7,20 +7,24 @@
 
 import CoreLocation
 import Foundation
+import Combine
 
-protocol LocationManaging {
-	
+protocol LocationManagerProtocol {
+	func requestLocation()
+	var userCurrentlocation: CurrentValueSubject<CLLocation?, Never> { get set }
 }
 
-class LocationManager: NSObject {
+class LocationManager: NSObject, LocationManagerProtocol {
 	private let locationManager = CLLocationManager()
 	private var canRequestLocation = false
-	var userShortlocation: CLLocation? = nil
+	var userCurrentlocation: CurrentValueSubject<CLLocation?, Never> = CurrentValueSubject<CLLocation?, Never>(nil)
 	
 	override init() {
 		super.init()
 		locationManager.delegate = self
-		
+	}
+	
+	func requestLocation() {
 		if canRequestLocation {
 			locationManager.requestLocation()
 		}
@@ -28,18 +32,19 @@ class LocationManager: NSObject {
 }
 
 extension LocationManager: CLLocationManagerDelegate {
-	
-	 func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 		switch status {
 		case .authorizedAlways, .authorizedWhenInUse:
 			canRequestLocation = true
 			locationManager.requestLocation()
-		case .denied, .notDetermined, .restricted:
+		case .notDetermined:
 			canRequestLocation = false
-			// To do: pop up
+			locationManager.requestWhenInUseAuthorization()
+		case .denied, .restricted:
+			canRequestLocation = false
 		@unknown default:
 			canRequestLocation = false
-			// To do: pop up
+			locationManager.requestWhenInUseAuthorization()
 		}
 	}
 	
@@ -48,10 +53,14 @@ extension LocationManager: CLLocationManagerDelegate {
 			return
 		}
 
-		userShortlocation = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+		let userLocation = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+		
+		userCurrentlocation.send(userLocation)
 	}
 
-	 func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+		// To do: maybe add a pop up
 		print("Failed to find user's location: \(error.localizedDescription)")
 	}
 }
+

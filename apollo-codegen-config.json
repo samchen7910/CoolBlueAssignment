@@ -1,0 +1,43 @@
+{
+  "schemaNamespace" : "CoolBlueAssignment",
+  "input" : {
+    "operationSearchPaths" : [
+      "**/*.graphql",
+    ],
+    "schemaSearchPaths" : [
+      "**/CoolBlueAssignment/Graphql/schema.json",
+    ]
+  },
+  "output" : {
+    "testMocks" : {
+      "none" : {
+      }
+    },
+    "schemaTypes" : {
+      "path" : "./CoolBlueAssignment",
+	  "moduleType" : {
+		  "swiftPackageManager" : {
+		  }
+	  }
+    },
+    "operations" : {
+      "inSchemaModule" : {
+      }
+    }
+  },
+  "schemaDownloadConfiguration": {
+	  "downloadMethod": {
+		  "introspection": {
+			  "endpointURL": "https://mobile-api.coolblue-production.eu/graphql",
+			  "httpMethod": {
+				  "POST": {}
+			  },
+			  "includeDeprecatedInputValues": false,
+			  "outputFormat": "SDL"
+		  }
+	  },
+	  "downloadTimeout": 60,
+	  "headers": [],
+	  "outputPath": "./graphql/schema.graphqls"
+  }
+}
